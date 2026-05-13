@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>주사위 게임</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>주사위 게임</h1>
+
+    <!-- 시작 화면 -->
+    <div id="start-screen">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="이름 입력"
+      />
+
+      <input
+        type="text"
+        id="studentId"
+        placeholder="학번 입력"
+      />
+
+      <button onclick="startGame()">
+        시작하기
+      </button>
+
+    </div>
+
+    <!-- 게임 화면 -->
+    <div id="game-screen">
+
+      <div id="dice-area">
+
+        <span id="dice1">🎲</span>
+
+        <span id="dice2">🎲</span>
+
+        <span id="dice3">🎲</span>
+
+      </div>
+
+      <button id="roll-btn" onclick="rollDice()">
+        주사위 굴리기
+      </button>
+
+      <h2 id="result-text"></h2>
+
+    </div>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
