@@ -76,114 +76,199 @@ async function startGame() {
 
 
 
+function getDiceEmoji(number) {
+
+  const diceEmojis = {
+
+    1: "⚀",
+
+    2: "⚁",
+
+    3: "⚂",
+
+    4: "⚃",
+
+    5: "⚄",
+
+    6: "⚅"
+
+  };
+
+
+
+  return diceEmojis[number];
+
+}
+
+
+
 async function rollDice() {
 
   const dice1 =
-    Math.floor(Math.random() * 6) + 1;
+    document.getElementById("dice1");
 
   const dice2 =
-    Math.floor(Math.random() * 6) + 1;
+    document.getElementById("dice2");
 
   const dice3 =
-    Math.floor(Math.random() * 6) + 1;
+    document.getElementById("dice3");
 
 
 
-  document.getElementById("dice1")
-    .textContent = dice1;
+  // 흔들리는 효과
+  dice1.classList.add("rolling");
 
-  document.getElementById("dice2")
-    .textContent = dice2;
+  dice2.classList.add("rolling");
 
-  document.getElementById("dice3")
-    .textContent = dice3;
+  dice3.classList.add("rolling");
 
 
 
-  const sum =
-    dice1 + dice2 + dice3;
+  // 굴리는 애니메이션
+  let rolling = setInterval(() => {
+
+    dice1.textContent =
+      getDiceEmoji(
+        Math.floor(Math.random() * 6) + 1
+      );
+
+    dice2.textContent =
+      getDiceEmoji(
+        Math.floor(Math.random() * 6) + 1
+      );
+
+    dice3.textContent =
+      getDiceEmoji(
+        Math.floor(Math.random() * 6) + 1
+      );
+
+  }, 100);
 
 
 
-  let score = 0;
+  // 2초 뒤 결과 결정
+  setTimeout(async () => {
 
-  let message = "";
-
-
-
-  // 합 10 초과
-  if (sum > 10) {
-
-    score += 3;
-
-    message += "합 10 초과 +3점! ";
-  }
+    clearInterval(rolling);
 
 
 
-  // 세 숫자 동일
-  if (
-    dice1 === dice2 &&
-    dice2 === dice3
-  ) {
+    dice1.classList.remove("rolling");
 
-    score += 5;
+    dice2.classList.remove("rolling");
 
-    message += "트리플 +5점! ";
-  }
+    dice3.classList.remove("rolling");
 
 
 
-  if (score === 0) {
+    const num1 =
+      Math.floor(Math.random() * 6) + 1;
 
-    message = "0점 😢";
+    const num2 =
+      Math.floor(Math.random() * 6) + 1;
 
-  } else {
-
-    message += `총 ${score}점 🎉`;
-
-  }
-
-
-
-  document.getElementById("result-text")
-    .textContent = message;
+    const num3 =
+      Math.floor(Math.random() * 6) + 1;
 
 
 
-  const name =
-    document.getElementById("name").value;
+    dice1.textContent =
+      getDiceEmoji(num1);
 
-  const studentId =
-    document.getElementById("studentId").value;
+    dice2.textContent =
+      getDiceEmoji(num2);
 
-
-
-  // Firebase 저장
-  await db.collection("diceGame").add({
-
-    name: name,
-
-    studentId: studentId,
-
-    dice1: dice1,
-
-    dice2: dice2,
-
-    dice3: dice3,
-
-    sum: sum,
-
-    score: score,
-
-    time: new Date()
-
-  });
+    dice3.textContent =
+      getDiceEmoji(num3);
 
 
 
-  // 한 번만 가능
-  document.getElementById("roll-btn")
-    .style.display = "none";
+    const sum =
+      num1 + num2 + num3;
+
+
+
+    let score = 0;
+
+    let message = "";
+
+
+
+    // 합 10 초과
+    if (sum > 10) {
+
+      score += 3;
+
+      message += "합 10 초과 +3점! ";
+    }
+
+
+
+    // 트리플
+    if (
+      num1 === num2 &&
+      num2 === num3
+    ) {
+
+      score += 5;
+
+      message += "트리플 +5점! ";
+    }
+
+
+
+    if (score === 0) {
+
+      message = "0점 😢";
+
+    } else {
+
+      message += `총 ${score}점 🎉`;
+
+    }
+
+
+
+    document.getElementById("result-text")
+      .textContent = message;
+
+
+
+    const name =
+      document.getElementById("name").value;
+
+    const studentId =
+      document.getElementById("studentId").value;
+
+
+
+    // Firebase 저장
+    await db.collection("diceGame").add({
+
+      name: name,
+
+      studentId: studentId,
+
+      dice1: num1,
+
+      dice2: num2,
+
+      dice3: num3,
+
+      sum: sum,
+
+      score: score,
+
+      time: new Date()
+
+    });
+
+
+
+    // 한 번만 가능
+    document.getElementById("roll-btn")
+      .style.display = "none";
+
+  }, 2000);
 
 }
