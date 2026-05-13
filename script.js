@@ -194,12 +194,12 @@ async function rollDice() {
 
 
 
-    // 합 10 초과
-    if (sum > 10) {
+    // 합 12 이상
+    if (sum >= 12) {
 
       score += 3;
 
-      message += "합 10 초과 +3점! ";
+      message += "합 12 이상 +3점! ";
     }
 
 
