@@ -5,7 +5,7 @@ body {
 
   font-family: sans-serif;
 
-  background: #f7f4ff;
+  background: #f2f8ff;
 
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ body {
 
 h1 {
 
-  color: #8b6cff;
+  color: #5aa9ff;
 
 }
 
@@ -39,7 +39,7 @@ input {
 
   border-radius: 12px;
 
-  border: 2px solid #d5c8ff;
+  border: 2px solid #bfe3ff;
 
   font-size: 16px;
 
@@ -55,7 +55,7 @@ button {
 
   border-radius: 12px;
 
-  background: #a78bff;
+  background: #7fc4ff;
 
   color: white;
 
@@ -77,7 +77,53 @@ button {
 
   margin-top: 30px;
 
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
   font-size: 90px;
+
+}
+
+.dice {
+
+  width: 90px;
+
+  height: 90px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.rolling {
+
+  animation: shake 0.15s infinite;
+
+}
+
+@keyframes shake {
+
+  0% { transform: rotate(0deg); }
+
+  25% { transform: rotate(8deg); }
+
+  50% { transform: rotate(-8deg); }
+
+  75% { transform: rotate(6deg); }
+
+  100% { transform: rotate(0deg); }
 
 }
 
@@ -87,7 +133,7 @@ button {
 
   font-size: 28px;
 
-  color: #7b5cff;
+  color: #4d8fe0;
 
   font-weight: bold;
 
